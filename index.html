@@ -66,7 +66,7 @@
             <div class="flex flex-col md:flex-row gap-4 items-center">
                 <!-- 搜尋框 -->
                 <div class="relative w-full md:flex-grow">
-                    <input type="text" id="searchInput" placeholder="搜尋房間名稱..." class="w-full pl-10 pr-4 py-2 border theme-border rounded-full focus:outline-none theme-focus-ring focus:ring-2 transition-all">
+                    <input type="text" id="searchInput" placeholder="搜尋房間或物品名稱..." class="w-full pl-10 pr-4 py-2 border theme-border rounded-full focus:outline-none theme-focus-ring focus:ring-2 transition-all">
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
                     </svg>
@@ -292,7 +292,10 @@
             
             const filteredData = roomData.filter(room => {
                 const matchesCategory = currentCategory === 'all' || room.category === currentCategory;
-                const matchesSearch = room.name.toLowerCase().includes(searchTerm);
+                // 檢查房間名稱或物品清單是否包含搜尋詞
+                const matchesName = room.name.toLowerCase().includes(searchTerm);
+                const matchesItems = room.items.some(item => item.toLowerCase().includes(searchTerm));
+                const matchesSearch = matchesName || matchesItems;
                 return matchesCategory && matchesSearch;
             });
 
