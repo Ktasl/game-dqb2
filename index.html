@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勇者鬥惡龍 創世小玩家2 房間設計圖鑑</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts 的 Inter 字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #FFF5F7; /* 淡粉色背景 */
+        }
+        /* 定義主題色 */
+        .theme-pink {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 182 193 / var(--tw-bg-opacity)); /* 亮粉色 */
+        }
+        .theme-text {
+            color: #9F3450; /* 深粉色文字 */
+        }
+        .theme-border {
+             border-color: #FBCFE8; /* 柔和粉色邊框 */
+        }
+        .theme-hover:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(251 207 232 / var(--tw-bg-opacity)); /* 懸停時的更淺粉色 */
+        }
+        .theme-focus-ring:focus {
+            --tw-ring-color: rgb(251 113 133 / 0.5);
+        }
+        /* 滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF5F7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FBCFE8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F9A8D4;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- 主容器 -->
+    <div class="container mx-auto px-4 py-8 md:py-12">
+
+        <!-- 頁面標題 -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold theme-text tracking-wider">勇者鬥惡龍 創世小玩家2</h1>
+            <p class="text-xl md:text-2xl font-semibold text-gray-600 mt-2">房間設計圖鑑</p>
+        </header>
+
+        <!-- 篩選與搜尋區域 -->
+        <div class="mb-8 p-4 bg-white/70 backdrop-blur-sm rounded-2xl shadow-md sticky top-4 z-10">
+            <div class="flex flex-col md:flex-row gap-4 items-center">
+                <!-- 搜尋框 -->
+                <div class="relative w-full md:flex-grow">
+                    <input type="text" id="searchInput" placeholder="搜尋房間名稱..." class="w-full pl-10 pr-4 py-2 border theme-border rounded-full focus:outline-none theme-focus-ring focus:ring-2 transition-all">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <!-- 分類按鈕 -->
+                <div id="categoryFilters" class="flex flex-wrap gap-2 justify-center">
+                    <button class="filter-btn active px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="all">全部</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="生活">生活</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="餐廚">餐廚</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="工房">工房</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="娛樂">娛樂</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="戶外">戶外</button>
+                    <button class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200" data-category="特殊">特殊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 房間卡片列表 -->
+        <div id="roomList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- 房間卡片將由 JavaScript 動態生成 -->
+        </div>
+        
+        <!-- 找不到結果的提示 -->
+        <div id="noResults" class="text-center py-12 hidden">
+             <p class="text-gray-500 text-lg">找不到符合條件的房間 ＞︿＜</p>
+        </div>
+
+    </div>
+
+    <!-- 預覽彈出視窗 (Modal) -->
+    <div id="roomModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300 opacity-0">
+        <div id="modalContent" class="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+            <!-- 內容由 JavaScript 動態填入 -->
+        </div>
+    </div>
+
+
+    <script>
+        // 自動計算大小和分類的輔助函數
+        const processRoomData = (data) => {
+            const categories = {
+                '生活': ['臥房', '寢室', '山莊', '旅店', '旅館', '宿舍', '個人房', '雙人房', '浴池', '浴室', '廁所', '洗澡間', '更衣室', '客廳'],
+                '餐廚': ['廚房', '食堂', '酒吧', '用餐處', '飯廳'],
+                '工房': ['工房', '打鐵舖', '釀酒所', '工作室', '研究所', '倉庫', '武器庫', '道具店', '武器店', '接待大廳', '走廊'],
+                '娛樂': ['游泳池', '遊戲', '健身房', '按摩室', '音樂廳', '舞廳'],
+                '戶外': ['公園', '庭園', '花園', '牧場', '小屋', '廣場'],
+            };
+
+            const assignCategory = (name) => {
+                for (const category in categories) {
+                    if (categories[category].some(keyword => name.includes(keyword))) {
+                        return category;
+                    }
+                }
+                return '特殊'; // Default category
+            };
+
+            return data.map(room => {
+                let totalItems = 0;
+                room.items.forEach(itemStr => {
+                    const match = itemStr.match(/X(\d+)/);
+                    if (match && match[1]) {
+                        totalItems += parseInt(match[1], 10);
+                    }
+                });
+
+                let size = '小';
+                if (totalItems > 8) {
+                    size = '大';
+                } else if (totalItems > 4) {
+                    size = '普通';
+                }
+
+                return {
+                    ...room,
+                    size: size,
+                    category: assignCategory(room.name)
+                };
+            });
+        };
+
+        // 原始房間資料
+        const originalRoomData = [
+            { name: '首次建造的臥房', items: ['床X2', '照明X1'] },
+            { name: '大家的寢室', items: ['床X4', '照明X2'] },
+            { name: '熱鬧寢室', items: ['床X8', '照明X4'] },
+            { name: '整潔寢室', items: ['床X1', '照明X1', '柱鐘X1', '盆栽花或觀葉植物X1'] },
+            { name: '農家臥房', items: ['農具裝飾X1', '柴薪X1', '床X2', '照明X1'] },
+            { name: '農家寢室', items: ['農具裝飾X2', '柴薪X2', '床X4', '照明X2'] },
+            { name: '鄉村山莊', items: ['農具裝飾X4', '柴薪X4', '床X8', '照明X4'] },
+            { name: '肌肉男臥房', items: ['旅館掛壁裝飾X1', '罐子X3', '床X8'] },
+            { name: '肌肉男旅店', items: ['旅館掛壁裝飾X1', '罐子X3', '床X8', '照明X2', '椅子X2'] },
+            { name: '肌肉男旅館', items: ['旅館掛壁裝飾X1', '罐子X3', '高級床X8', '高級照明X2', '椅子X2', '櫥櫃X1'] },
+            { name: '士兵臥房', items: ['武具裝飾X1', '床X2', '照明X1'] },
+            { name: '士兵營房', items: ['武具裝飾X2', '床X4', '照明X2'] },
+            { name: '士兵宿舍', items: ['武具裝飾X4', '床X8', '照明X4'] },
+            { name: '洗澡間', items: ['木桶浴缸or浴缸or淋浴器X2', '掛壁巾X2', '水盆X2', '照明X1'] },
+            { name: '男性浴池', items: ['木桶浴缸or浴缸or淋浴器X2或溫泉(成品)X1', '掛壁巾X2', '男子掛壁裝飾'] },
+            { name: '女性浴池', items: ['木桶浴缸or浴缸or淋浴器X2或溫泉(成品)X1', '掛壁巾X2', '女子掛壁裝飾'] },
+            { name: '暖和浴室', items: ['木桶浴缸X1', '掛壁巾X3', '水盆X4', '椅子X1'] },
+            { name: '燒柴浴池', items: ['木桶浴缸X2', '掛壁巾X3', '水盆X4', '椅子X1', '照明X1', '柴薪X2'] },
+            { name: '淋浴室', items: ['淋浴器X1', '掛壁巾X1', '屏風X1'] },
+            { name: '透明淋浴室', items: ['淋浴器X4', '掛壁巾X2', '屏風X2', '照明X2', '窗框固定玻璃X4'] },
+            { name: '暖和溫泉', items: ['溫泉(成品)X1', '出水口(非獅子出水口)X1', '浴室椅X3', '水盆X3'] },
+            { name: '陰森浴室', items: ['紅水X10格', '怪物標誌(如教團旗子或教團掛飾)', '浴室椅X3', '水盆X3'] },
+            { name: '四季如夏游泳池', items: ['游泳池X1', '陽傘X1', '休閒椅X1', '熱帶飲料X1'] },
+            { name: '簡約廚房', items: ['收納箱X1', '柴火X3 or 平底鍋調理台X2 or 磚造廚房X1或是柴火X2平底鍋X1'] },
+            { name: '用餐處', items: ['收納箱X1', '柴火X3 or 平底鍋調理台X2 or 磚造廚房X1或是柴火X2平底鍋X1', '用餐桌'] },
+            { name: '農家廚房', items: ['收納箱X1', '小麥袋X3', '柴薪X2', '柴火X3 or 平底鍋調理台X2 or 磚造廚房X1或是柴火X2平底鍋X1'] },
+            { name: '農家食堂', items: ['收納箱X1', '小麥袋X3', '柴薪X2', '柴火X3 or 平底鍋調理台X2 or 磚造廚房X1或是柴火X2平底鍋X1', '用餐桌'] },
+            { name: '香菇廚房', items: ['收納箱X1', '香菇X1', '柴火X2 or 平底鍋調理台X2 or 柴火X1 平底鍋X1'] },
+            { name: '香菇食堂', items: ['收納箱X1', '香菇X1', '平底鍋調理台X2 or 磚造廚房X1', '用餐桌'] },
+            { name: '城堡廚房', items: ['收納箱X1', '平底鍋調理台X2 or 磚造廚房X1', '水井X1'] },
+            { name: '城堡食堂', items: ['收納箱X1', '平底鍋調理台X2 or 磚造廚房X1', '水井X1', '供餐桌'] },
+            { name: '怪物廚房', items: ['收納箱X1', '超大盤怪物飯X1', '磚造廚房X1'] },
+            { name: '飯廳', items: ['用餐桌X4', '照明X1'] },
+            { name: '王室飯廳', items: ['國王的用餐桌X1', '掛毯X2', '暖爐X1'] },
+            { name: '首次建造的個人房', items: ['個人房掛壁裝飾X1', '床X1', '照明X1', '椅子X1'] },
+            { name: '還算別緻的個人房', items: ['個人房掛壁裝飾X1', '床X1', '照明X1', '椅子X1', '桌子X1', '掛壁裝飾X1'] },
+            { name: '豪華個人房', items: ['個人房掛壁裝飾X1', '高級床X1', '高級照明X1', '高級椅子X1', '高級桌子X1', '掛壁裝飾X1'] },
+            { name: '酷炫個人房', items: ['個人房掛壁裝飾X1', '木桶X1', '玻璃瓶X1', '啞鈴X1', '照明X1', '床X1'] },
+            { name: '可愛個人房', items: ['個人房掛壁裝飾X1', '梳妝台X1', '椅子X1', '插花or盆栽花X1', '照明X1', '床X1'] },
+            { name: '國王寢室', items: ['個人房掛壁裝飾X1', '國王大床X1', '高級椅子X1', '高級照明X1', '暖爐X1'] },
+            { name: '公主寢室', items: ['個人房掛壁裝飾X1', '公主的床鋪X1', '高級椅子X1', '高級照明X1', '盆栽花X1'] },
+            { name: '首次建造的雙人房', items: ['個人房掛壁裝飾X2', '床X2', '照明X1', '椅子X2'] },
+            { name: '還算別緻的雙人房', items: ['個人房掛壁裝飾X2', '床X2', '照明X1', '椅子X2', '桌子X1', '掛壁裝飾X1'] },
+            { name: '豪華雙人房', items: ['個人房掛壁裝飾X2', '高級床X2', '高級照明X1', '高級椅子X2', '高級桌子X1', '掛壁裝飾X1'] },
+            { name: '酒吧', items: ['酒吧組X1'] },
+            { name: '大家的酒吧', items: ['酒吧組X1', '酒館掛壁裝飾X1', '飲料裝飾X2', '宴會桌X1', '酒桶X2'] },
+            { name: '遊戲酒館', items: ['酒吧組X1', '酒館掛壁裝飾X1', '銀水壺X1', '撲克牌桌X1', '飛鏢組X1', '掛壁照明X1'] },
+            { name: '廁所', items: ['罐子or馬桶X1', '掛壁巾X1'] },
+            { name: '大家的廁所', items: ['馬桶X3', '掛壁巾X3', '屏風X2'] },
+            { name: '男廁', items: ['馬桶X3', '掛壁巾X3', '男子掛壁裝飾X1'] },
+            { name: '女廁', items: ['馬桶X3', '掛壁巾X3', '女子掛壁裝飾X1'] },
+            { name: '鄉村風格廁所', items: ['罐子or馬桶X1', '掛壁巾X1', '麥稈堆X1'] },
+            { name: '花香廁所', items: ['罐子or馬桶X1', '掛壁巾X1', '盆栽花or插花X1'] },
+            { name: '城堡廁所', items: ['罐子or馬桶X1', '掛壁巾X1', '插牆旗幟X1'] },
+            { name: '更衣室', items: ['櫃子or大型衣櫃X1', '照明X1', '梳妝台X1', '椅子X1'] },
+            { name: '洗澡更衣室', items: ['櫃子or大型衣櫃X1', '照明X1', '掛壁巾X1', '水盆X1'] },
+            { name: '兔女郎更衣室', items: ['櫃子or大型衣櫃X1', '照明X1', '木桶X1', '盆栽花or插花X1'] },
+            { name: '游泳池更衣室', items: ['櫃子or大型衣櫃X1', '照明X1', '掛壁巾X1', '陽傘X1'] },
+            { name: '客廳', items: ['舒適沙發X1 or 毛皮沙發X2', '盆栽花X2', '觀葉植物X2', '暖爐X1', '拖把裝飾X1'] },
+            { name: '農家倉庫', items: ['收納箱X1', '罐子X1', '麥桿堆X1', '繩索X1', '農具裝飾X1', '柴薪X1'] },
+            { name: '武器庫', items: ['收納箱X1', '武具裝飾X4', '柵欄X2'] },
+            { name: '金屬工房', items: ['火爐 or 神鐵爐X1', '收納箱X1', '掛壁袋X1', '罐子X1'] },
+            { name: '打鐵舖', items: ['鐵砧X1', '收納箱X1', '掛壁袋X1', '武器店掛壁裝飾X1'] },
+            { name: '釀酒所', items: ['酒桶X2', '收納箱X1', '掛壁袋X1', '木桶X2'] },
+            { name: '印染工作室', items: ['染料桶X1', '收納箱X1', '掛壁袋X1', '水盆X2'] },
+            { name: '創造師室', items: ['收納箱X1', '掛壁袋X1', '空蕩島工作台X1', '藥碾子X1', '廚房裝飾X1'] },
+            { name: '道具店', items: ['桌子X1', '標價牌X1', '道具店掛壁裝飾X1', '木箱子X2 or 藥草裝飾X1 or 奇美拉之翼裝飾X1'] },
+            { name: '武器店', items: ['桌子X1', '標價牌X1', '武器店掛壁裝飾X1', '武具裝飾X2'] },
+            { name: '接待大廳', items: ['桌子X2', '掛壁裝飾X1', '桌上照明X1', '文具X1'] },
+            { name: '走廊', items: ['照明X2', '柱子X2', '盆栽花 or 插花X2', '掛壁裝飾X2 or 窗簾X2 or 掛毯X2 or 大掛毯X2'] },
+            { name: '肌肉男健身房', items: ['啞鈴X2', '鶴嘴鋤裝飾X2', '掛壁巾X2'] },
+            { name: '按摩室', items: ['床X1', '窗簾X2', '屏風X1', '照明X1'] },
+            { name: '教會', items: ['祭壇X1', '桌上照明X2', '女神像X1', '椅子X4'] },
+            { name: '作戰會議室', items: ['羅德大桌X1', '地圖X1', '棋子X2'] },
+            { name: '魔法研究所', items: ['魔法工作台X1', '水晶球X1', '圓軟墊X1', '香爐X1'] },
+            { name: '訓練室', items: ['士兵用假人X4', '立矛架X2', '木柵欄X4'] },
+            { name: '王座之間', items: ['王座X1', '掛毯 or 大掛毯X4', '篝火X2'] },
+            { name: '壞掉的王座之間', items: ['壞掉的王座X1'] },
+            { name: '哈貢教會', items: ['邪教祭壇X1', '邪神像X1', '邪教大浮雕X1', '邪教浮雕X1', '邪教臉孔裝飾X1', '邪教火把X1'] },
+            { name: '禁忌提煉房', items: ['禁忌提煉台X1', '收納箱X1', '邪神像X1', '邪教花柱X2', '邪教祭壇X1', '邪教火把X1'] },
+            { name: '詭異植物園', items: ['收納箱X1', '奇怪的大花X2', '奇怪的花X4'] },
+            { name: '圖書室', items: ['書架X3', '堆高的書本X3 or 書籍X3'] },
+            { name: '圖書館', items: ['書架X5', '堆高的書本X3', '書籍X3', '桌子X1', '椅子X1', '筆記X1'] },
+            { name: '石像房間', items: ['不會動的石像(雕像類)X1', '扶手X3'] },
+            { name: '展示室', items: ['繪畫X2', '扶手X4'] },
+            { name: '美術室', items: ['繪畫X4', '雕像X2', '扶手X10', '展示立牌X1'] },
+            { name: '資料室', items: ['展示台X2', '扶手X4'] },
+            { name: '博物館', items: ['展示台X5', '扶手X10', '展示立牌X1', '製作棚架套件X2'] },
+            { name: '寶物庫', items: ['展示台X1', '扶手X2', '寶箱X5', '寶物X1(用金篝火就可)'] },
+            { name: '財寶室', items: ['展示台X1', '扶手X2', '寶箱X5', '寶物X1(用金篝火就可)', '寶山X1', '掛毯X2'] },
+            { name: '墳場', items: ['墓碑X3', '花X3', '長椅X1'] },
+            { name: '占卜室', items: ['水晶球', '圓軟墊X1', '堆高的書本X1', '書籍X1', '窗簾X2'] },
+            { name: '辦事處', items: ['居民名冊X1', '鐘X1', '小桌X3', '立牌 or 擋路巨鼠X1'] },
+            { name: '音樂廳', items: ['樂器X3 or 樂器X2 鋼琴組X1', '椅子X1', '窗簾X2'] },
+            { name: '舞廳', items: ['舞孃的舞台X3', '方塊燈X1', '窗簾X4'] },
+            { name: '牢房', items: ['俘虜鎖鏈X1', '罐子X1'] },
+            { name: '拷問室', items: ['俘虜鎖鏈X2', '斷頭台X1(去潺潺島打精英怪上級惡魔稀有掉落)', '監獄床鋪X1', '骨頭X2'] },
+            { name: '布偶小屋', items: ['布偶X2', '雪怪踏墊X1', '椅子X1'] },
+            { name: '火焰室', items: ['長椅X1', '掛壁火炬X2(泥巴做的壁火)', '掛壁火把X2(銅製作)', '篝火X2', '守衛篝火X2'] },
+            { name: '熔岩室', items: ['熔岩(岩漿)X6', '小石頭X3 or 岩石X2 or 巨岩X1'] },
+            { name: '泥濘室', items: ['汙水X6', '香蒲X3', '沼澤枯樹X1'] },
+            { name: '龍王之間(隱藏房間)', items: ['龍王的王座X1', '龍柱X2', '龍王軍旗幟X2(潺潺島打精英怪白銀惡魔稀有掉落)'] },
+            { name: '哈貢之間(隱藏房間)', items: ['哈貢的王座X1', '邪教花柱X2', '教團旗幟X2'] },
+            { name: '滿是罐子的房間', items: ['罐子X5', '收納箱X1'] },
+            { name: '滿是菇類的房間', items: ['菇類X6', '收納箱X1'] },
+            { name: '脆弱的房間', items: ['魔法炸彈X1(蓋好一個空房間直接裡面放一個魔法炸彈)'] },
+            { name: '明媚牧場', items: ['牧草X5', '木籬笆 or 西部風格門扉 or 時尚籬笆X1', '麥桿堆X1'] },
+            { name: '飼育小屋', items: ['動物的乾草床X1', '飼料盆X1', '麥桿堆X1'] },
+            { name: '飲水處', items: ['乾淨的水X10', '收納箱X1', '水盆X1', '罐子X2'] },
+            { name: '井邊廣場', items: ['廣場入口 石 or 廣場入口 木 X1', '水井X1', '花X1'] },
+            { name: '鞦韆公園', items: ['長椅X1', '天然鞦韆X1', '花X2', '木製立足處X2'] },
+            { name: '長著草的房間', items: ['長椅X1', '草X5'] },
+            { name: '開著花的房間', items: ['花X6', '草X4'] },
+            { name: '花卉庭園', items: ['高級長椅X1', '白花(請放沒蝴蝶的)X8', '蔓性玫瑰(牆壁的玫瑰)X1', '蔓性玫瑰葉子X1', '繡球花X1'] },
+            { name: '森林庭園', items: ['長椅X1', '山毛櫸大樹', '大椰子樹', '大杉樹 or 積雪大杉樹 X1', '大白樺樹X1', '樹枝X2'] },
+            { name: '沙漠庭園', items: ['長椅X1', '仙人掌花X3', '仙人掌柱的頭X2', '仙人掌柱X3', '劍蘭X1', '向日葵X1'] },
+            { name: '叢林庭園', items: ['木板長椅X1', '大王花X1', '叢林草X1', '麻痺花X5', '糖棕X1', '蘇鐵X1'] },
+            { name: '石景庭園', items: ['長椅X1', '大石頭 or 生苔的大石頭X3', '小石頭 or 生苔的小石頭X5', '石瓦礫(木墩工作台製作)X1', '石製立足處X2'] },
+            { name: '水景庭園', items: ['高級長椅X1', '乾淨的水X10', '噴水池X1', '蓮花X1', '蓮葉X1'] },
+            { name: '積雪庭園', items: ['長椅X1', '雪人X1', '白雪草X3', '積雪杉樹 or 積雪大杉樹X2'] },
+            { name: '怪物庭園', items: ['木板長椅X1', '怪物紋地板浮雕X1', '貫穿大地之巨牙X2', '詛咒葉叢X3', '枯樹X2', '芒草X3'] },
+            { name: '麥爾基德花園', items: ['高級長椅X1', '神秘花X5', '開花葉叢(藥用草叢開花版)X3', '櫻花樹X1', '乾淨的水X8', '木橋X1'] },
+        ];
+        
+        const roomData = processRoomData(originalRoomData);
+
+        // DOM 元素
+        const roomList = document.getElementById('roomList');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilters = document.getElementById('categoryFilters');
+        const noResults = document.getElementById('noResults');
+        const roomModal = document.getElementById('roomModal');
+        const modalContent = document.getElementById('modalContent');
+
+        let currentCategory = 'all';
+
+        // 渲染房間卡片
+        const renderRooms = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const filteredData = roomData.filter(room => {
+                const matchesCategory = currentCategory === 'all' || room.category === currentCategory;
+                const matchesSearch = room.name.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+
+            roomList.innerHTML = ''; // 清空列表
+
+            if (filteredData.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filteredData.forEach(room => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-2xl shadow-lg p-5 flex flex-col justify-between transform hover:-translate-y-1 transition-transform duration-300 cursor-pointer';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold theme-text pr-2">${room.name}</h3>
+                                <span class="flex-shrink-0 bg-pink-100 theme-text text-xs font-semibold px-2.5 py-1 rounded-full">${room.category}</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mb-3"><span class="font-semibold">房間大小:</span> ${room.size}</p>
+                            <div class="text-xs font-medium text-gray-600">
+                                <p class="font-semibold mb-1">所需物品:</p>
+                                <ul class="list-disc list-inside pl-1 space-y-1 text-gray-700">
+                                    ${room.items.slice(0, 4).map(item => `<li>${item.replace(/X/g, ' x ')}</li>`).join('')}
+                                    ${room.items.length > 4 ? '<li class="text-gray-400">...等 (點擊查看全部)</li>' : ''}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => openModal(room));
+                    roomList.appendChild(card);
+                });
+            }
+        };
+
+        // 開啟預覽視窗
+        const openModal = (room) => {
+            modalContent.innerHTML = `
+                 <div class="p-6 relative">
+                    <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <h2 class="text-2xl font-bold theme-text mb-3">${room.name}</h2>
+                    <div class="flex items-center gap-4 text-sm text-gray-500 my-3">
+                        <span class="bg-pink-100 theme-text font-medium px-3 py-1 rounded-full">${room.category}</span>
+                        <span class="font-medium">房間大小: ${room.size}</span>
+                    </div>
+                    <div class="mt-4 bg-pink-50 border-l-4 theme-border p-4 rounded-r-lg">
+                        <h4 class="font-semibold mb-2">所需物品清單</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            ${room.items.map(item => `<li>${item.replace(/X/g, ' x ')}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            roomModal.classList.remove('hidden');
+            setTimeout(() => {
+                roomModal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+        };
+        
+        // 關閉預覽視窗
+        const closeModal = () => {
+            roomModal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                roomModal.classList.add('hidden');
+            }, 300);
+        };
+
+        // 處理分類篩選
+        categoryFilters.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                currentCategory = e.target.dataset.category;
+                renderRooms();
+            }
+        });
+        
+        // 處理搜尋輸入
+        searchInput.addEventListener('input', renderRooms);
+
+        // 點擊 Modal 背景關閉
+        roomModal.addEventListener('click', (e) => {
+            if (e.target === roomModal) {
+                closeModal();
+            }
+        });
+
+        // 按下 ESC 鍵關閉
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !roomModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // 初始渲染
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            const updateButtonStyles = () => {
+                 buttons.forEach(button => {
+                    if(button.dataset.category === currentCategory) {
+                        button.classList.add('theme-pink', 'text-white', 'font-semibold');
+                        button.classList.remove('bg-white', 'text-gray-600', 'theme-hover');
+                    } else {
+                        button.classList.remove('theme-pink', 'text-white', 'font-semibold');
+                        button.classList.add('bg-white', 'text-gray-600', 'theme-hover');
+                    }
+                });
+            }
+            
+            categoryFilters.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                   updateButtonStyles();
+                }
+            });
+            
+            updateButtonStyles();
+            renderRooms();
+        });
+
+    </script>
+</body>
+</html>
+
