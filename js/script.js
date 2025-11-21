@@ -38,11 +38,11 @@ const processRoomData = (data) => {
             }
         });
 
-        let size = '小';
+        let size = '小型 (4-35格)';
         if (totalItems > 8) {
-            size = '大';
+            size = '大型 (64-150格)';
         } else if (totalItems > 4) {
-            size = '普通';
+            size = '普通 (36-63格)';
         }
 
         return {
@@ -66,9 +66,9 @@ const processFurnitureData = (data) => {
             }
         });
 
-        let size = '小';
+        let size = '小型';
         if (totalItems > 8) {
-            size = '大';
+            size = '大型';
         } else if (totalItems > 4) {
             size = '普通';
         }
@@ -185,7 +185,7 @@ const renderItems = () => {
                 }
             });
 
-            const sizeLabel = (item.category === '組合房間') ? '組合需求:' : '物品大小:';
+            const sizeLabel = (item.category === '組合房間') ? '組合需求:' : '房間大小:';
             const itemsLabel = (item.category === '組合房間') ? '所需房間:' : '所需物品:';
 
             card.innerHTML = `
@@ -274,7 +274,7 @@ const renderRecipes = (searchTerm) => {
 
 // 開啟預覽視窗
 const openModal = (item) => {
-    const sizeLabel = (item.category === '組合房間') ? '組合需求:' : '物品大小:';
+    const sizeLabel = (item.category === '組合房間') ? '組合需求:' : '房間大小:';
     const itemsLabel = (item.category === '組合房間') ? '所需房間：' : '所需物品清單：';
     const noteHtml = item.note ? `<div class="mt-4 p-3 bg-blue-50 border-l-4 border-blue-300 text-blue-800 text-sm rounded-r-lg shadow-sm">
                 <h4 class="font-semibold mb-1 text-blue-900">組合房間須知</h4>
