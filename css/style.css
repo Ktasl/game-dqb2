@@ -1,0 +1,101 @@
+/* 自定義樣式 */
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background-color: #FFF5F7; /* 淡粉色背景 */
+}
+/* 定義主題色 */
+.theme-pink {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 182 193 / var(--tw-bg-opacity)); /* 亮粉色 */
+}
+.theme-text {
+    color: #9F3450; /* 深粉色文字 */
+}
+.theme-border {
+        border-color: #FBCFE8; /* 柔和粉色邊框 */
+}
+.theme-hover:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(251 207 232 / var(--tw-bg-opacity)); /* 懸停時的更淺粉色 */
+}
+.theme-focus-ring:focus {
+    --tw-ring-color: rgb(251 113 133 / 0.5);
+}
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #FFF5F7;
+}
+::-webkit-scrollbar-thumb {
+    background: #FBCFE8;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #F9A8D4;
+}
+
+/* 分頁按鈕樣式 */
+.tab-btn {
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    color: #9F3450;
+    background-color: white;
+    border: 2px solid #FBCFE8;
+    cursor: pointer;
+}
+.tab-btn.active {
+    background-color: #9F3450; /* 深粉色 */
+    color: white;
+    border-color: #9F3450;
+}
+
+/* 食材/料理表格樣式 */
+.ingredient-table {
+    width: 100%;
+    background-color: white;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    margin-bottom: 1.5rem; /* 24px */
+}
+.ingredient-table th {
+    background-color: #FFF0F5; /* 更淡的粉色 */
+    padding: 0.75rem 1rem; /* 12px 16px */
+    text-align: left;
+    font-weight: 600;
+    color: #9F3450;
+    border-bottom: 2px solid #FBCFE8;
+}
+.ingredient-table td {
+    padding: 0.75rem 1rem; /* 12px 16px */
+    border-bottom: 1px solid #FCE7F3; /* 非常淡的粉色邊框 */
+    vertical-align: top;
+}
+.ingredient-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.ingredient-table tbody tr:nth-child(even) {
+    background-color: #FFFBFD;
+}
+.ingredient-table .category-cell {
+    font-weight: 500;
+    color: #C13A60;
+    vertical-align: middle;
+}
+
+/* 用於動態生成的料理表格的標題 */
+.recipe-table-title {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: #9F3450; /* theme-text */
+    margin-bottom: 1rem; /* 16px */
+    margin-top: 2rem; /* 32px */
+}
+.recipe-table-title:first-child {
+    margin-top: 0;
+}
