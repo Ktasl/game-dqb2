@@ -1,0 +1,302 @@
+[
+  {
+    "category": "海鮮",
+    "name": "海帶",
+    "rank": "普通"
+  },
+  {
+    "category": "海鮮",
+    "name": "蜜桃貝",
+    "rank": "普通"
+  },
+  {
+    "category": "海鮮",
+    "name": "蟹爪",
+    "rank": "普通"
+  },
+  {
+    "category": "海鮮",
+    "name": "魷魚",
+    "rank": "普通"
+  },
+  {
+    "category": "肉類",
+    "name": "雞肉",
+    "rank": "高級"
+  },
+  {
+    "category": "肉類",
+    "name": "羊肉",
+    "rank": "高級"
+  },
+  {
+    "category": "肉類",
+    "name": "牛肉",
+    "rank": "高級"
+  },
+  {
+    "category": "肉類",
+    "name": "生肉",
+    "rank": "普通"
+  },
+  {
+    "category": "肉類",
+    "name": "龍肉",
+    "rank": "極品"
+  },
+  {
+    "category": "魚類",
+    "name": "沙丁魚",
+    "rank": "普通"
+  },
+  {
+    "category": "魚類",
+    "name": "鮭魚",
+    "rank": "高級"
+  },
+  {
+    "category": "魚類",
+    "name": "鯛魚",
+    "rank": "極品"
+  },
+  {
+    "category": "魚類",
+    "name": "石鯛",
+    "rank": "普通"
+  },
+  {
+    "category": "菇類",
+    "name": "香菇",
+    "rank": "普通"
+  },
+  {
+    "category": "菇類",
+    "name": "水藍色鴻喜菇",
+    "rank": "極品"
+  },
+  {
+    "category": "菇類",
+    "name": "苦香菇",
+    "rank": "-"
+  },
+  {
+    "category": "小麥",
+    "name": "小麥",
+    "rank": "普通"
+  },
+  {
+    "category": "小麥",
+    "name": "蕎麥*",
+    "rank": "高級"
+  },
+  {
+    "category": "小麥",
+    "name": "稻*",
+    "rank": "極品"
+  },
+  {
+    "category": "其他",
+    "name": "雞蛋",
+    "rank": "普通"
+  },
+  {
+    "category": "其他",
+    "name": "咖啡豆",
+    "rank": "普通"
+  },
+  {
+    "category": "其他",
+    "name": "藥用葉子",
+    "rank": "-"
+  },
+  {
+    "category": "櫻花花瓣",
+    "name": "櫻花花瓣",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "水",
+    "rank": "-"
+  },
+  {
+    "category": "溫泉",
+    "name": "溫泉",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "雪",
+    "rank": "-"
+  },
+  {
+    "category": "冰",
+    "name": "冰",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "牛奶",
+    "rank": "-"
+  },
+  {
+    "category": "油",
+    "name": "油",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "奶油",
+    "rank": "-"
+  },
+  {
+    "category": "味噌",
+    "name": "味噌",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "起司",
+    "rank": "-"
+  },
+  {
+    "category": "扭動藤蔓",
+    "name": "扭動藤蔓",
+    "rank": "-"
+  },
+  {
+    "category": "其他",
+    "name": "腐肉",
+    "rank": "-"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "包心菜",
+    "rank": "普通"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "紅包心菜",
+    "rank": "極品"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "番茄",
+    "rank": "高級"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "嚇一跳番茄",
+    "rank": "極品"
+  },
+  {
+    "category": "蔥",
+    "name": "蔥",
+    "rank": "普通"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "大豆",
+    "rank": "普通"
+  },
+  {
+    "category": "南瓜",
+    "name": "南瓜",
+    "rank": "高級"
+  },
+  {
+    "category": "南瓜",
+    "name": "超巨大南瓜",
+    "rank": "極品"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "山葵",
+    "rank": "普通"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "銀山葵",
+    "rank": "極品"
+  },
+  {
+    "category": "甘蔗",
+    "name": "甘蔗",
+    "rank": "普通"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "瓜茄",
+    "rank": "高級"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "辣椒",
+    "rank": "普通"
+  },
+  {
+    "category": "火焰辣椒",
+    "name": "火焰辣椒",
+    "rank": "極品"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "馬鈴薯",
+    "rank": "普通"
+  },
+  {
+    "category": "玉米",
+    "name": "玉米",
+    "rank": "高級"
+  },
+  {
+    "category": "蔬菜類",
+    "name": "仙人掌果肉",
+    "rank": "普通"
+  },
+  {
+    "category": "水果類",
+    "name": "香瓜",
+    "rank": "高級"
+  },
+  {
+    "category": "水果類",
+    "name": "閃耀香瓜",
+    "rank": "極品"
+  },
+  {
+    "category": "水果類",
+    "name": "草莓",
+    "rank": "高級"
+  },
+  {
+    "category": "水果類",
+    "name": "甜草莓",
+    "rank": "極品"
+  },
+  {
+    "category": "水果類",
+    "name": "仙人掌果實",
+    "rank": "普通"
+  },
+  {
+    "category": "水果類",
+    "name": "桃柿",
+    "rank": "普通"
+  },
+  {
+    "category": "水果類",
+    "name": "香蕉",
+    "rank": "高級"
+  },
+  {
+    "category": "藤蔓果實",
+    "name": "藤蔓果實",
+    "rank": "普通"
+  },
+  {
+    "category": "藤蔓果實",
+    "name": "發光藤蔓果實",
+    "rank": "高級"
+  }
+]

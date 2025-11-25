@@ -1,12 +1,9 @@
-import {
-    originalRoomData,
-    originalFurnitureData,
-    originalComboRoomData,
-    originalBarrelData,
-    originalOneItemData,
-    originalTwoItemData,
-    originalThreeItemData
-} from './data.js';
+// Global data variables
+let roomData = [];
+let furnitureData = [];
+let comboRoomData = [];
+let recipeData = {}; // Object to hold recipe categories
+let ingredientData = []; // New ingredient data
 
 // 自動計算大小和分類的輔助函數 (房間)
 const processRoomData = (data) => {
@@ -97,9 +94,33 @@ const processComboRoomData = (data, note) => {
     });
 };
 
-const roomData = processRoomData(originalRoomData);
-const furnitureData = processFurnitureData(originalFurnitureData);
-const comboRoomData = processComboRoomData(originalComboRoomData, comboRoomNote);
+// Load data from JSON files
+const loadData = async () => {
+    try {
+        const [rooms, furniture, comboRooms, recipes, ingredients] = await Promise.all([
+            fetch('data/rooms.json').then(res => res.json()),
+            fetch('data/furniture.json').then(res => res.json()),
+            fetch('data/combo_rooms.json').then(res => res.json()),
+            fetch('data/recipes.json').then(res => res.json()),
+            fetch('data/ingredients.json').then(res => res.json())
+        ]);
+
+        roomData = processRoomData(rooms);
+        furnitureData = processFurnitureData(furniture);
+        comboRoomData = processComboRoomData(comboRooms, comboRoomNote);
+        recipeData = recipes;
+        ingredientData = ingredients;
+
+        // Initial render after data is loaded
+        renderItems();
+        // Pre-render ingredients if needed, or just when tab is clicked
+        renderIngredients();
+
+    } catch (error) {
+        console.error("Error loading data:", error);
+        alert("無法讀取資料，請確認 data.json 檔案是否存在。");
+    }
+};
 
 // DOM 元素
 const roomList = document.getElementById('roomList');
@@ -252,13 +273,13 @@ const renderRecipes = (searchTerm) => {
 
     // 處理雙欄佈局
     const leftColHTML = [
-        createTableHTML('酒桶製作物', ['料理', '材料', '效果'], originalBarrelData, filterLogic),
-        createTableHTML('兩種材料', ['料理', '材料1', '材料2', '效果'], originalTwoItemData, filterLogic)
+        createTableHTML('酒桶製作物', ['料理', '材料', '效果'], recipeData.barrel, filterLogic),
+        createTableHTML('兩種材料', ['料理', '材料1', '材料2', '效果'], recipeData.twoItem, filterLogic)
     ].join('');
 
     const rightColHTML = [
-        createTableHTML('一種材料', ['料理', '材料', '效果'], originalOneItemData, filterLogic),
-        createTableHTML('三種材料', ['料理', '材料1', '材料2', '材料3', '效果'], originalThreeItemData, filterLogic)
+        createTableHTML('一種材料', ['料理', '材料', '效果'], recipeData.oneItem, filterLogic),
+        createTableHTML('三種材料', ['料理', '材料1', '材料2', '材料3', '效果'], recipeData.threeItem, filterLogic)
     ].join('');
 
     recipeTablesContainer.innerHTML = `<div class="flex flex-col">${leftColHTML}</div><div class="flex flex-col">${rightColHTML}</div>`;
@@ -269,6 +290,67 @@ const renderRecipes = (searchTerm) => {
     } else {
         noRecipeResults.classList.add('hidden');
     }
+};
+
+// --- 新增：渲染食材表格 ---
+const renderIngredients = () => {
+    if (!ingredientData || ingredientData.length === 0) return;
+
+    const container = document.getElementById('ingredientTablesContainer');
+    if (!container) return;
+
+    // Group by category
+    const grouped = {};
+    const categoriesOrder = [];
+    ingredientData.forEach(item => {
+        if (!grouped[item.category]) {
+            grouped[item.category] = [];
+            categoriesOrder.push(item.category);
+        }
+        grouped[item.category].push(item);
+    });
+
+    // Split into two columns
+    const mid = Math.ceil(categoriesOrder.length / 2);
+    const col1Cats = categoriesOrder.slice(0, mid);
+    const col2Cats = categoriesOrder.slice(mid);
+
+    const generateTableHTML = (cats) => {
+        let html = `
+            <table class="ingredient-table">
+                <thead>
+                    <tr>
+                        <th class="w-1/4">分類</th>
+                        <th class="w-1/2">材料</th>
+                        <th class="w-1/4">等級</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        cats.forEach(cat => {
+            const items = grouped[cat];
+            items.forEach((item, i) => {
+                html += '<tr>';
+                if (i === 0) {
+                    html += `<td rowspan="${items.length}" class="category-cell">${cat}</td>`;
+                }
+                html += `<td>${item.name}</td>`;
+                html += `<td>${item.rank}</td>`;
+                html += '</tr>';
+            });
+        });
+
+        html += '</tbody></table>';
+        return html;
+    };
+
+    container.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+            <div>${generateTableHTML(col1Cats)}</div>
+            <div>${generateTableHTML(col2Cats)}</div>
+        </div>
+    `;
 };
 
 
@@ -449,5 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateButtonStyles();
-    renderItems(); // 初始渲染 "房間圖鑑"
+    updateButtonStyles();
+    loadData(); // 初始讀取資料並渲染
 });
